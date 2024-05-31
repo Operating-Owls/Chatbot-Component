@@ -1,5 +1,20 @@
 # Chatbot-Component
-This is a chatbot component designed to be used in nextjs projects.  It is powered by OpenAI's GPT-3.5 model.
+This is a chatbot component designed to be used in nextjs projects.  It is powered by OpenAI's GPT-3.5 model.  It also uses Flask as a backend server to handle the API requests to OpenAI.
+
+## Running the project
+To run the project, you will need to have a `.env` file in the root directory of the project.  This file should contain the variables found in the `.env.example` file.  Ensure you replace the OPENAI_API_KEY variable with your own OpenAI API key.  Once you have the `.env` file set up, you can start the backend server by running the following commands:
+```
+cd backend
+pip install -r requirements.txt
+flask run
+```
+Then, return to the root directory of the project and run the following commands:
+```
+cd frontend
+npm install
+npm run dev
+```
+This will start the frontend server and you can view the project by going to `http://localhost:3000` in your browser.
 
 ## Overview
 The goal of this project is to create a chatbot component that can be easily integrated into any nextjs project. The focus is to create a developer-friendly component that can be easily customized and styled to fit the needs of any website.  A benefit of this project is the reduction of customer service costs and the ability to provide much faster and more accessible responses to customers, within the site itself.
