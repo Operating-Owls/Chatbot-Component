@@ -2,7 +2,7 @@
 This is a chatbot component designed to be used in nextjs projects.  It is powered by OpenAI's GPT-3.5 model.  It also uses Flask as a backend server to handle the API requests to OpenAI.
 
 ## Running the Project
-To run the project, you will need to have a `.env` file in the root directory of the project.  This file should contain the variables found in the `.env.example` file.  Ensure you replace the OPENAI_API_KEY variable with your own OpenAI API key.  Once you have the `.env` file set up, you can move on to the next step.
+To run the project, you will need two .env files.  One in the backend folder and one in the frontend folder.  The .env files should contain the variables listed in the .env.example files in each folder.  Replace any placeholder values with your own values.
 Next, you will need to install the dependencies for the backend and frontend servers.  To do this, open a terminal window and run the following commands to start the backend server:
 ```
 cd backend
