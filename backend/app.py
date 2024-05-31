@@ -8,7 +8,8 @@ load_dotenv()  # Load environment variables from .env file
 app = Flask(__name__)
 
 # Get CORS origins from environment variable
-cors_origins = os.getenv('CORS_ORIGINS', '*')  # Default to allow all origins
+cors_origins = os.getenv('CORS_ORIGINS', '*')
+print(cors_origins)
 
 # Apply CORS to your app
 CORS(app, resources={r"/*": {"origins": cors_origins}})
