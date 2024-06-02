@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 from getChatbotMessage import getChatbotMessage
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ app = Flask(__name__)
 cors_origins = os.getenv('CORS_ORIGINS', '*')
 print(cors_origins)
 
-# Apply CORS to your app
+# Apply CORS
 CORS(app, resources={r"/*": {"origins": cors_origins}})
 
 @app.route('/')
@@ -24,21 +24,25 @@ def hello():
 def data():
     return jsonify({'message': 'Hello, World!'})
 
+# Define the chatbot endpoint
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     try:
+        # Get the data from the request
         data = request.get_json()
+        # the message from the user
         message = data['message']
+        # Create a chat log with the user message
         chat_log = []
         chat_log.append({"role": "user", "content": message})
-        # if there is both a chat log and a message, append the message to the chat log
-
-        # otherwise assume the message is already in the chat log
+        # Get the response from the chatbot
         chatBotResponse = getChatbotMessage(chat_log)
+        # Return the response
         return jsonify({'message': chatBotResponse})
     except Exception as e:
+        # Return an error in case of an exception
         print("Error:", e)
-        return jsonify({'message': str(e)})
+        return jsonify({'message': 'An unexpected error occurred.'})
 
 if __name__ == '__main__':
     app.run(debug=True)
