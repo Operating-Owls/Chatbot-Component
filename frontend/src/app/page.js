@@ -6,12 +6,18 @@ export default function Home() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const [data, setData] = useState(null);
     useEffect(() => {
-        fetch(apiUrl + "/api/data")
+        fetch(apiUrl + "/api/chatbot", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({message: "Hello, Chatbot!"})
+        })
             .then((res) => res.json())
             .then((data) => {
-                setData(data);
                 console.log(data);
-            });
+                setData(data);
+        });
     }, []);
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
