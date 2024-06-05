@@ -33,6 +33,7 @@ export default function Chat () {
         e.preventDefault();
         setError(null);
         setMessageArray((prevMessageArray => [...prevMessageArray, userMessage(input)]))
+        console.log("User message: ", input)
         try {
             console.log("Sending message to OpenAI API")
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -43,7 +44,7 @@ export default function Chat () {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({message: "Hello, Chatbot!"})
+                    body: JSON.stringify({message: input})
                 });
                 const data = await response.json();
                 console.log(data);
