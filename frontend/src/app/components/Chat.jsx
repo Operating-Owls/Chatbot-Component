@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import axios from "axios";
 import BotMessage from "./BotMessage";
 import UserMessage from "./UserMessage";
 import ChatNavbar from "./ChatNavbar";
@@ -34,21 +33,26 @@ export default function Chat () {
         e.preventDefault();
         setError(null);
         setMessageArray((prevMessageArray => [...prevMessageArray, userMessage(input)]))
+        console.log("User message: ", input)
         try {
-            const result = await axios.post('https://api.openai.com/v1/chat/completions', { 
-                    model: 'gpt-3.5-turbo',
-                    messages: [{role: 'user', content: input }],
-                },
-                {
+            console.log("Sending message to OpenAI API")
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            
+            const fetchData = async () => {
+                const response = await fetch(apiUrl + "/api/chatbot", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: process.env.OPENAI_API_KEY,
+                        "Content-Type": "application/json"
                     },
-                }
-            );
-            setResponse(result.data.choices[0].text);
-            botMessage(result.data.choices[0].message.content)
-            setMessageArray((prevMessageArray) => [...prevMessageArray, botMessage])
+                    body: JSON.stringify({message: input})
+                });
+                const data = await response.json();
+                console.log(data);
+                const successMessage = (<BotMessage response={data.message} time={messageTime()}/>)
+                setMessageArray((prevMessageArray) => [...prevMessageArray, successMessage])
+            };
+            fetchData();
+            
         } catch (error) {
             console.error('Error fetching data from OpenAI API', error);
             const errorMessage = (<BotMessage error={"Something went wrong."} time={messageTime()}/>)
