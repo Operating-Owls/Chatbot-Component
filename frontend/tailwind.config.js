@@ -17,7 +17,18 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["light", "dark", "cupcake", "corporate"]
+    themes: [
+      {
+        mytheme: {
+          "primary": "#FFFFFF", 
+          "secondary": "#091010",
+          "accent": "#8b9fba",
+          "neutral": "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+      "light",
+    ],
   },
   plugins: [
     daisyui,

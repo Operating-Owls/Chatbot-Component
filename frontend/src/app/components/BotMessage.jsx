@@ -12,7 +12,7 @@ export default function BotMessage(props) {
             <div className="chat-footer opacity-50">
                 <time className="text-xs opacity-50">{props.time}</time>
             </div>
-            <div className="chat-bubble">{props.error ? props.error : props.response}</div>
+            <div className="chat-bubble text-left chat-bubble-neutral">{props.error ? props.error : props.response}</div>
             </div>
         </div>
     )

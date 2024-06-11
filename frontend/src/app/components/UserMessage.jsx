@@ -12,7 +12,7 @@ export default function UserMessage(props) {
             <div className="chat-footer opacity-50">
                 <time className="text-xs opacity-50">{props.time}</time>
             </div>
-            <div className="chat-bubble chat-bubble-accent">{props.messageContent}</div>
+            <div className="chat-bubble text-right chat-bubble-primary">{props.messageContent}</div>
         </div>
 
     )
