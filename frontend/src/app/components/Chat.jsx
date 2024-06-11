@@ -2,37 +2,50 @@ import React, {useState} from "react";
 import axios from "axios";
 import BotMessage from "./BotMessage";
 import UserMessage from "./UserMessage";
-import ChatNavbar from "./ChatNavbar";
-import { Autour_One } from "next/font/google";
+import AlertMessage from "./AlertMessage";
 
 export default function Chat () {
 
     const [input, setInput] = useState('');
-    const [response, setResponse] = useState('');
     const [error, setError] = useState(null);
 
     const[messageArray, setMessageArray] = React.useState([])
 
+    // 500 character rate limit
+    const maxMessageValue = 500;
     const handleInputChange = (e) => {
-        console.log("Changed!")
         setInput(e.target.value);
+
+        if (e.target.value.length <= maxMessageValue) {
+            setInput(e.target.value);
+            setError(null);
+        } else {
+            setError("This message is too long.")
+        }
     }
 
-    function messageTime () {
+    function messageTime() {
         var dateWithoutSecond = new Date();
         return dateWithoutSecond.toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'});
     }
 
-    const botMessage = (response) => (
-        <BotMessage response={response} time={messageTime()} key={messageTime()}/>
-    )
     const userMessage = (input) => (
         <UserMessage messageContent={input} time={messageTime()} key={messageTime()} />
     )
 
     const submitMessage = async (e) => {
         e.preventDefault();
-        setError(null);
+
+        if (!input.trim()) {
+            setError("You cannot send an empty string.")
+            return;
+        }
+
+        if (input.length > maxMessageValue) {
+            setError("This message is too long.")
+            return;
+        }
+
         setMessageArray((prevMessageArray => [...prevMessageArray, userMessage(input)]))
         try {
             const result = await axios.post('https://api.openai.com/v1/chat/completions', { 
@@ -55,19 +68,20 @@ export default function Chat () {
             setMessageArray((prevMessageArray) => [...prevMessageArray, errorMessage])
         }
         setInput('');
+        setError(null);
     };
 
     return (
-        <div>
-            <div className="p-1"></div>
-            <div>
-                {messageArray}
+        <div className="flex flex-col">
+            <div className="flex flex-col p-1 chat--box">
+                <div className="chat--box">{messageArray}</div>
+                {error && (<div className="justify-self-end p-0.5"><AlertMessage errorMessage={error}/></div>)}
             </div>
-            <div>
-            <form className=" btm-nav" onSubmit={submitMessage}>
-                <input type="text" placeholder="Type here" className="input" value={input} onChange={handleInputChange}/>
-                <button>Send</button>
-            </form>
+            <div className="justify-self-end">
+                <form className="flex flex-row join" onSubmit={submitMessage}>
+                    <input placeholder="Type here..." className="input input-md w-5/6 join-item" value={input} onChange={handleInputChange}/>
+                    <button className="btn btn-accent join-item">Send</button>
+                </form>
             </div>
         </div>
     );
