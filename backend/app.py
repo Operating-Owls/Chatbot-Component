@@ -16,7 +16,7 @@ print(cors_origins)
 # Apply CORS
 CORS(app, resources={r"/*": {"origins": cors_origins}})
 
-MESSAGE_LIMIT = 2
+MESSAGE_LIMIT = 5
 RESET_MINUTES=2
 # store sessions
 sessions = {}
@@ -66,7 +66,7 @@ def chatbot():
         data = get_session_data(session_id)
         if len(data) > MESSAGE_LIMIT:
             set_session_data(session_id, data)
-            return jsonify({'message': "sorry, you've used all allowed messages. Try again tomorrow"})
+            return jsonify({'message': "sorry, you've used all your allowed messages (5). Try again in 2 minutes (time should probably be increased)"})
         
         # Get the data from the request
         data = request.get_json()
