@@ -1,6 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+from systemPrompt import prompt
 # Load the environment variables from .env file
 load_dotenv()
 
@@ -13,6 +14,8 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 def getChatbotMessage(chat_log):
+    # prepend the prompt to the chat log
+    chat_log = [prompt] + chat_log
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=chat_log
@@ -23,7 +26,6 @@ def getChatbotMessage(chat_log):
 if __name__ == "__main__":
     print("Welcome to ChatGPT! Ask anything or type 'quit' to exit.")
     chat_log = []
-
     while True:
         user_message = input()
         if user_message.lower() == "quit":
