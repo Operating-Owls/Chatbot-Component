@@ -48,6 +48,7 @@ class ChatAPI {
           });
 
           if (!response.ok) {
+              console.error(response);
               const message = `An error has occured: ${response.status}`;
               throw new Error(message);
           }
