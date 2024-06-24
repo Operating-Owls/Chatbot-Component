@@ -52,7 +52,7 @@ export default function Chat () {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             
             const fetchData = async () => {
-                const response = await fetch(apiUrl + "/api/chatbot", {
+                const response = await fetch("/api/chatbot", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

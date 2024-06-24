@@ -1,21 +1,33 @@
 # Chatbot-Component
-This is a chatbot component designed to be used in nextjs projects.  It is powered by OpenAI's GPT-3.5 model.  It also uses Flask as a backend server to handle the API requests to OpenAI.
+This is a chatbot component designed to be used in nextjs projects.  It is powered by OpenAI's GPT-3.5 model. 
 
-## Running the Project
-To run the project, you will need two .env files.  One in the backend folder and one in the frontend folder.  The .env files should contain the variables listed in the .env.example files in each folder.  Replace any placeholder values with your own values.
-Next, you will need to install the dependencies for the backend and frontend servers.  To do this, open a terminal window and run the following commands to start the backend server:
+## Installation
+To install this project, follow the steps below.
+Clone the repository:
+```bash
+git clone https://github.com/Operating-Owls/Chatbot-Component.git
 ```
-cd backend
-pip install -r requirements.txt
-flask run
+navigate to the project directory:
+```bash
+cd Chatbot-Component
 ```
-Then, open a new terminal window and run the following commands to start the frontend server:
-```
-cd frontend
+Install the dependencies:
+```bash
 npm install
+```
+Create a .env file in the root directory of the project and add the following:
+```bash
+OPENAI_API_KEY=your_openai_api_key
+```
+The project is now ready to be run.
+
+## Usage
+To run the project, use the following command:
+```bash
 npm run dev
 ```
-This will start the frontend server and you can view the project by going to `http://localhost:3000` in your browser.
+Then, you can navigate to http://localhost:3000/ to view the chatbot component.
+
 
 ## Overview
 The goal of this project is to create a chatbot component that can be easily integrated into any nextjs project. The focus is to create a developer-friendly component that can be easily customized and styled to fit the needs of any website.  A benefit of this project is the reduction of customer service costs and the ability to provide much faster and more accessible responses to customers, within the site itself.
