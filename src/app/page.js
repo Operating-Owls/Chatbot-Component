@@ -1,13 +1,14 @@
 "use client";
 import Hero from "./components/Hero";
-import MainHeader from "./components/MainHeader";
+import ChatWindow from "./components/chatbot/ChatWindow";
+import ChatButton from "./components/chatbot/ChatButton";
 
 export default function Home() {
 
     return (
         <main>
-            <MainHeader />
-            <Hero />
+            <ChatWindow />
+            <ChatButton />
         </main>
     );
 }
