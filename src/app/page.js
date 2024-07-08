@@ -6,10 +6,8 @@ export default function Home() {
 
     return (
         <main>
-            <ChatButton />
-            <ChatWindow />
-
-
+            <ChatButton side="left">Hello world</ChatButton>
+            <ChatWindow side="left" />
         </main>
     );
 }
