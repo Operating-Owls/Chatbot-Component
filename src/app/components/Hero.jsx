@@ -1,6 +1,5 @@
 import React from "react";
-import ChatWindow from "./chatbot/ChatWindow";
-import ComponentsButton from "./ComponentsButton";
+
 
 export default function Hero() {
     return (
@@ -10,7 +9,6 @@ export default function Hero() {
                 <h1 className="mb-5 text-5xl font-bold">Meet Your ChatBot</h1>
                 <p className="mb-5">Try our ChatBot using OpenAI's GPT-3.5-Turbo model. </p>
                 <div className="flex justify-center space-x-4">
-                        <ComponentsButton />
                     </div>
                 </div>
             </div>
